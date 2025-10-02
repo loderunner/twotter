@@ -1,0 +1,25 @@
+version: 2.1
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.4.1
+    steps:
+      - checkout
+      - run: pnpm install
+      - run: pnpm run build
+
+  test:
+    docker:
+      - image: cimg/node:24.4.1
+      - image: postgres:16-alpine
+    steps:
+      - checkout
+      - run: pnpm install
+      - run: pnpm run test:integration
