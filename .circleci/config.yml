@@ -16,13 +16,13 @@ jobs:
       - run: pnpm run build
 
   test:
-    environment:
-      POSTGRES_USER: twotter
-      POSTGRES_PASSWORD: twotter
-      POSTGRES_DB: twotter
     docker:
       - image: cimg/node:24.4.1
       - image: postgres:16-alpine
+        environment:
+          POSTGRES_USER: twotter
+          POSTGRES_PASSWORD: twotter
+          POSTGRES_DB: twotter
     steps:
       - checkout
       - run: pnpm install
