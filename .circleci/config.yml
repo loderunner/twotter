@@ -23,3 +23,5 @@ jobs:
       - checkout
       - run: pnpm install
       - run: pnpm run test:integration
+      - store_test_results:
+          path: test-results
