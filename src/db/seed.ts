@@ -8,8 +8,6 @@ async function seed() {
   const client = await pool.connect();
 
   try {
-    await client.query('BEGIN');
-
     console.log('Wiping database...');
 
     // Delete in order due to foreign key constraints
@@ -146,8 +144,6 @@ async function seed() {
 
     console.log('Created likes');
 
-    await client.query('COMMIT');
-
     console.log('\n✅ Seed data summary:');
     console.log('   - 4 users (alice, bob, charlie, diana)');
     console.log('   - 9 follow relationships');
@@ -157,7 +153,6 @@ async function seed() {
 
     process.exit(0);
   } catch (error) {
-    await client.query('ROLLBACK');
     console.error('Seed failed:', error);
     process.exit(1);
   } finally {

@@ -12,7 +12,7 @@ import { setupIntegrationTests } from './setup.js';
  * Integration tests for database query functions.
  * These tests use deterministic seed data from seed-integration.ts
  */
-describe('Database Queries Integration Tests', () => {
+describe('Database Queries Integration Tests', async () => {
   setupIntegrationTests();
   describe('getAllUsers', () => {
     it('should return all users from the database', async () => {

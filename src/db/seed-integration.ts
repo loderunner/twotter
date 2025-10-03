@@ -250,8 +250,6 @@ async function seedIntegration() {
   const client = await pool.connect();
 
   try {
-    await client.query('BEGIN');
-
     console.log('Wiping database...');
 
     // Delete in order due to foreign key constraints
@@ -422,8 +420,6 @@ async function seedIntegration() {
 
     console.log(`✓ Created ${likeCount} likes`);
 
-    await client.query('COMMIT');
-
     console.log('\n✅ Integration seed data summary:');
     console.log(`   - ${NUM_USERS} users`);
     console.log(`   - ${followCount} follow relationships`);
@@ -437,11 +433,10 @@ async function seedIntegration() {
 
     process.exit(0);
   } catch (error) {
-    await client.query('ROLLBACK');
     console.error('Integration seed failed:', error);
     process.exit(1);
   } finally {
-    client.release();
+    await client.release();
   }
 }
 
