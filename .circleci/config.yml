@@ -26,6 +26,7 @@ jobs:
     steps:
       - checkout
       - run: pnpm install
+      - run: pnpm run db:migrate
       - run: pnpm run test:integration
       - store_test_results:
           path: test-results
